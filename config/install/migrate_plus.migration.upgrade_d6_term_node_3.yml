@@ -1,0 +1,26 @@
+id: upgrade_d6_term_node_3
+migration_tags:
+  - 'Drupal 6'
+  - Content
+deriver: Drupal\taxonomy\Plugin\migrate\D6TermNodeDeriver
+migration_group: bmg_drupal_6
+label: 'Term/node relationships'
+source:
+  plugin: d6_term_node
+  vid: '3'
+process:
+  product_id:
+    -
+      plugin: migration_lookup
+      migration: upgrade_d6_node_equipment
+      source: nid
+    -
+      plugin: skip_on_empty
+      method: row
+  type:
+    plugin: default_value
+    default_value: default
+  field_product_category: tid
+destination:
+  plugin: 'entity:commerce_product'
+migration_dependencies: {}

@@ -1,0 +1,8 @@
+id: bmg_drupal_6
+label: 'Import from Drupal 6'
+description: 'Migrations originally generated from drush migrate-upgrade --configure-only'
+source_type: 'Drupal 6'
+shared_configuration:
+  source:
+    key: legacy
+

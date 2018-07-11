@@ -1,0 +1,77 @@
+id: update_d6_node_equipment
+migration_tags:
+  - 'Drupal 6'
+  - Content
+migration_group: bmg_drupal_6
+label: 'Nodes (equipment)'
+source:
+  plugin: bmg_d6_product
+  node_type: equipment
+process:
+  nid: tnid
+  vid: vid
+  langcode:
+    plugin: default_value
+    default_value: 'en'
+  title: title
+  uid: node_uid
+  type:
+    plugin: default_value
+    default_value: default
+  status: status
+  created: created
+  changed: changed
+  promote: promote
+  sticky: sticky
+  stores/target_id: stores
+  body/format:
+    plugin: default_value
+    default_value: basic_html
+  body/value: body
+  revision_uid: revision_uid
+  revision_log: log
+  revision_timestamp: timestamp
+  variations/target_id:
+    plugin: migration_lookup
+    migration: uc6_product_variation
+    source: tnid
+  field_primary_image:
+    plugin: bmg_d6_file
+    source: field_image_cache
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: upgrade_d6_file
+        source: fid
+      alt: alt
+      title: title
+  field_clearance:
+    plugin: sub_process
+    source: field_overstock
+    process:
+      value:
+        plugin: static_map
+        source: value
+        default_value: 0
+        map:
+          'yes': 1
+  field_show_price:
+    plugin: sub_process
+    source: field_show_price
+    process:
+      value:
+        plugin: static_map
+        source: value
+        default_value: 0
+        map:
+          'on': 1
+  field_description: field_sale_desc
+  field_product_category:
+    plugin: migration
+    migration: upgrade_d6_taxonomy_term
+    source: category
+  field_tabs: why_tabs
+destination:
+  plugin: 'entity:commerce_product'
+  default_bundle: default
+migration_dependencies: {}

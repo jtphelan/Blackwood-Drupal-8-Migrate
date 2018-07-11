@@ -1,0 +1,38 @@
+id: upgrade_d6_node_distributors
+migration_tags:
+  - 'Drupal 6'
+  - Content
+migration_group: bmg_drupal_6
+label: 'Nodes (distributors)'
+source:
+  plugin: d6_node
+  node_type: distributors
+process:
+  type:
+    plugin: default_value
+    default_value: distributors
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: und
+  title: title
+  uid:
+    plugin: default_value
+    default_value: 1
+  status: status
+  created: created
+  changed: changed
+  promote: promote
+  sticky: sticky
+  revision_uid: revision_uid
+  revision_log: log
+  revision_timestamp: timestamp
+  field_distributor_website:
+    plugin: d6_cck_link
+    source: field_link
+  field_region:
+    plugin: default_value
+    default_value: 1
+destination:
+  plugin: 'entity:node'
+migration_dependencies: {}

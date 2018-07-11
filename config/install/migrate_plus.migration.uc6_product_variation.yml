@@ -1,0 +1,58 @@
+# Ubercart 6 Product Variation Migration
+#
+# For my use case, I had to create several different product variation types
+# and write an individual migration for each one. This is meant to be an example.
+id: uc6_product_variation
+label: Migrate product variations from Ubercart
+migration_tags:
+  - Drupal 6
+  - Ubercart
+migration_group: bmg_drupal_6
+source:
+  plugin: uc6_product_variation
+process:
+  type:
+    plugin: static_map
+    source: type
+    map:
+      equipment: default
+      accessories: accessory
+      part: parts
+  uid: node_uid
+  sku: model
+  title: title
+  'price/number': sell_price
+  'price/currency_code': currency
+  # The product_id field is NULL after this migration.
+  # It is a backreference to the product ID. The product entity class's
+  # postSave() updates this whenever a product entity is saved, therefore a
+  # subsequent product migration will set this on the product variations created
+  # by this migration.
+  #product_id:
+  status: status
+  created: created
+  changed: changed
+  'weight/number': weight
+  'weight/unit':
+    plugin: default_value
+    default_value: 'lb'
+  'dimensions/length': length
+  'dimensions/width': width
+  'dimensions/height': height
+  'dimensions/unit':
+    plugin: default_value
+    default_value: 'in'
+  field_image:
+    plugin: bmg_d6_file
+    source: field_image_cache
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: upgrade_d6_file
+        source: fid
+      alt: alt
+      title: title
+destination:
+  plugin: entity:commerce_product_variation
+  destination_module: commerce_product
+migration_dependencies: {}

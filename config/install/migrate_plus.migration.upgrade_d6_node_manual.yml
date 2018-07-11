@@ -1,0 +1,52 @@
+id: upgrade_d6_node_manual
+migration_tags:
+  - 'Drupal 6'
+  - Content
+migration_group: bmg_drupal_6
+label: 'Nodes (manual)'
+source:
+  plugin: d6_node
+  node_type: manual
+process:
+  nid: tnid
+  vid: vid
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: und
+  title: title
+  uid: node_uid
+  type:
+    plugin: default_value
+    default_value: manual
+  status: status
+  created: created
+  changed: changed
+  promote: promote
+  sticky: sticky
+  revision_uid: revision_uid
+  revision_log: log
+  revision_timestamp: timestamp
+  field_associated_products:
+    plugin: sub_process
+    source: field_equipment
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: upgrade_d6_node_equipment
+        source: nid
+  field_manual:
+    plugin: bmg_d6_file
+    source: field_manual
+  field_manual_type:
+    plugin: entity_lookup
+    source: field_manual_type/0
+    ignore_case: true
+  field_product_line:
+    plugin: entity_lookup
+    source: field_manual_product_line/0
+    ignore_case: true
+destination:
+  plugin: 'entity:node'
+  default_bundle: manual
+migration_dependencies: {}

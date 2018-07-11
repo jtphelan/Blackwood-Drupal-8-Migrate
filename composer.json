@@ -1,0 +1,14 @@
+{
+  "name": "drupal/bmg_migration",
+  "type": "drupal-module",
+  "description": "A custom Drupal 6 Ubercart to Drupal 8 Commerce Migration",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/bmg_migration",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/bmg_migration",
+    "source": "http://cgit.drupalcode.org/bmg_migration"
+  },
+  "require": { }
+}

@@ -1,0 +1,47 @@
+id: upgrade_d6_node_why
+migration_tags:
+  - 'Drupal 6'
+  - Content
+migration_group: bmg_drupal_6
+label: 'Nodes (why)'
+source:
+  plugin: d6_node
+  node_type: why
+process:
+  nid: tnid
+  vid: vid
+  langcode:
+    plugin: default_value
+    default_value: 'en'
+  title: title
+  uid: node_uid
+  type:
+    plugin: default_value
+    default_value: product_tab
+  status: status
+  created: created
+  changed: changed
+  promote: promote
+  sticky: sticky
+  body/format:
+    plugin: default_value
+    default_value: basic_html
+  body/value: body
+  revision_uid: revision_uid
+  revision_log: log
+  revision_timestamp: timestamp
+  field_tab_title: field_tab_title
+  field_video:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: field_videos
+    -
+      plugin: iterator
+      source: field_videos
+      process:
+        value: embed
+destination:
+  plugin: 'entity:node'
+  default_bundle: product_tab
+migration_dependencies: {}

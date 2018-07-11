@@ -1,0 +1,45 @@
+id: upgrade_d6_node_dealers
+migration_tags:
+  - 'Drupal 6'
+  - Content
+migration_group: bmg_drupal_6
+label: 'Nodes (dealers)'
+source:
+  plugin: d6_node
+  node_type: dealers
+process:
+  nid: tnid
+  vid: vid
+  type:
+    plugin: default_value
+    default_value: service_dealers
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: und
+  title: title
+  uid:
+    plugin: default_value
+    default_value: 1
+  status: status
+  created: created
+  changed: changed
+  promote: promote
+  sticky: sticky
+  body/format:
+    plugin: default_value
+    default_value: basic_html
+  body/value: body
+  body/summary: teaser
+  revision_uid: revision_uid
+  revision_log: log
+  revision_timestamp: timestamp
+  field_dealer_website:
+    plugin: d6_cck_link
+    source: field_link
+  field_latitude: field_latitude
+  field_longitude: field_longitude
+  field_name: field_name
+destination:
+  plugin: 'entity:node'
+migration_dependencies: {}

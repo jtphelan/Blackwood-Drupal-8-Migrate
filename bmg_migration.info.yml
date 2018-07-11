@@ -1,0 +1,8 @@
+name: BMG Migration
+type: module
+description: A custom Drupal 6 Ubercart to Drupal 8 Commerce Migration
+core: 8.x
+package: Custom
+dependencies:
+  - migrate_drupal
+  - migrate_plus
